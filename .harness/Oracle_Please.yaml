@@ -72,7 +72,7 @@ pipeline:
                                   github_user="asarkar157"
                                   oci_compartment_id="ocid1.tenancy.oc1..aaaaaaaav7owv6i2e5wyksmc2wha26ogyygjhw6y62xrl3dsyuxs724dulka"
                                   tailscale_auth_key="<+secrets.getValue("tailscale_auth_key")>"
-                                  private_key="<+secrets.getValue("OCI_PEM")>"
+                                  private_key=<<EOT"<+secrets.getValue("OCI_PEM")>"EOT
                               identifier: A
                               type: Inline
                   timeout: 10m
