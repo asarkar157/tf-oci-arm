@@ -17,9 +17,9 @@ variable "fingerprint" {
   sensitive = true
 }
 
-variable "private_key_path" {
-  default = ""
+variable "private_key" {
   type      = string
+  sensitive = true
 }
 
 variable "oci_auth" {
@@ -33,7 +33,8 @@ provider "oci" {
   tenancy_ocid     = var.tenancy_ocid
   user_ocid        = var.user_ocid
   fingerprint      = var.fingerprint
-  auth             = var.oci_auth
+  auth             = APIKey
+  private_key      = var.private_key
 }
 
 variable "github_user" {
