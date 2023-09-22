@@ -76,13 +76,13 @@ pipeline:
                       temp_key_file=$(mktemp)
                       echo -n "$PRIVATE_KEY_CONTENT" > "$temp_key_file"
 
-                      #SIGNATURE=$(echo -en "$SIGNATURE_STRING" | openssl dgst -sha256 -sign "$(pwd)/$temp_key_file" | openssl enc -e -base64)
+                      SIGNATURE=$(echo -n "$SIGNATURE_STRING" | openssl dgst -sha256 -sign "$(cat $temp_key_file)" | openssl enc -e -base64)
 
                       cat $temp_key_file
                       # Remove the temporary key file
                       rm -f "$temp_key_file"
 
-                      SIGNATURE=$(echo -en "$SIGNATURE_STRING" | openssl dgst -sha256 -sign <(echo -n "$PRIVATE_KEY_CONTENT") | openssl enc -e -base64)
+                      #SIGNATURE=$(echo -en "$SIGNATURE_STRING" | openssl dgst -sha256 -sign <(echo -n "$PRIVATE_KEY_CONTENT") | openssl enc -e -base64)
 
                       # Make the API request
                       curl -X POST -sS $REQUEST_URL \
