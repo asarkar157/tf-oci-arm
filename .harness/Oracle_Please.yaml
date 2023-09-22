@@ -6,6 +6,87 @@ pipeline:
   tags: {}
   stages:
     - stage:
+        name: Trigger Oracle Stack
+        identifier: Trigger_Oracle_Stack
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: false
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec: {}
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: Run_1
+                  identifier: Run_1
+                  spec:
+                    connectorRef: Dockerhub_Arunav
+                    image: ubuntu
+                    shell: Sh
+                    command: |
+                      #!/bin/bash
+
+                      sudo apt-get install uuid-runtime
+
+                      # Oracle Cloud Infrastructure API Endpoint
+                      OCI_API_ENDPOINT="https://resourcemanager.us-sanjose-1.oraclecloud.com"
+
+                      # OCI Identity Domain (Tenancy) OCID
+                      TENANCY_OCID="<+secrets.getValue("OCI_tenancy_ID")>"
+
+                      # OCI User OCID
+                      USER_OCID="<+secrets.getValue("OCI_user_ID")>"
+
+                      # OCI User's API Key Fingerprint
+                      API_KEY_FINGERPRINT="<+secrets.getValue("OCI_API_fingerprint")>"
+
+                      # Replace this with your actual private key content
+                      PRIVATE_KEY_CONTENT="<+secrets.getValue("OCI_key")>"
+
+                      # Stack OCID (the ID of the stack you want to operate on)
+                      STACK_OCID="<+secrets.getValue("OCID_stack_ID")>"
+
+                      # Resource Action OCID (the ID of the resource action for the job)
+                      RESOURCE_ACTION_OCID="your_resource_action_ocid_here"
+
+                      # Authentication Details
+                      AUTHENTICATION_DETAILS="$HOME/.oci/config"  # Use your OCI configuration file
+
+                      # Generate a timestamp for the request
+                      DATE=$(date -u "+%a, %d %h %Y %H:%M:%S GMT")
+
+                      # Generate a unique request ID
+                      REQUEST_ID=$(uuidgen)
+
+                      # Request URL
+                      REQUEST_URL="$OCI_API_ENDPOINT/20180917/resourceActions/$RESOURCE_ACTION_OCID/jobs"
+
+                      # Request body with parameters (if needed)
+                      REQUEST_BODY='{
+                          "stackId": "'$STACK_OCID'",
+                          "executionPlanStrategy": "AUTO_APPROVED"
+                      }'
+
+                      # Generate the signature string
+                      SIGNATURE_STRING="date: $DATE"
+                      SIGNATURE=$(echo -en "$SIGNATURE_STRING" | openssl dgst -sha256 -sign <(echo -n "$PRIVATE_KEY_CONTENT") | openssl enc -e -base64)
+
+                      # Make the API request
+                      curl -X POST -sS $REQUEST_URL \
+                          -H "Authorization: Signature $USER_OCID:$API_KEY_FINGERPRINT:$SIGNATURE" \
+                          -H "Content-Type: application/json" \
+                          -H "Date: $DATE" \
+                          -H "RequestId: $REQUEST_ID" \
+                          --data "$REQUEST_BODY" \
+                          --config $AUTHENTICATION_DETAILS
+
+                      # Add error handling and processing of the response as needed
+    - stage:
         name: Trigger Oracle Stack Job
         identifier: Trigger_Oracle_Stack_Job
         description: ""
