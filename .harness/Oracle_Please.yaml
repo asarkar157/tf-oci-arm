@@ -186,3 +186,33 @@ pipeline:
                     outputVariables: []
                   timeout: 10m
         tags: {}
+    - stage:
+        name: TF
+        identifier: TF
+        description: ""
+        type: Custom
+        spec:
+          execution:
+            steps:
+              - step:
+                  type: TerraformApply
+                  name: TerraformApply_1
+                  identifier: TerraformApply_1
+                  spec:
+                    provisionerIdentifier: A
+                    configuration:
+                      type: Inline
+                      spec:
+                        configFiles:
+                          store:
+                            spec:
+                              connectorRef: Arunav_GH
+                              repoName: tf-oci-arm
+                              gitFetchType: Branch
+                              branch: main
+                              folderPath: /
+                            type: Github
+                          moduleSource:
+                            useConnectorCredentials: false
+                  timeout: 10m
+        tags: {}
