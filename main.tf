@@ -1,18 +1,31 @@
 variable "region" {
+  type      = string
 }
 
 variable "tenancy_ocid" {
+  type      = string
+  sensitive = true
 }
 
 variable "user_ocid" {
-  default = ""
+  type      = string
+  sensitive = true
 }
 
 variable "fingerprint" {
+  type      = string
+  sensitive = true
 }
 
 variable "private_key_path" {
   default = ""
+  type      = string
+}
+
+variable "oci_auth" {
+  default = ""
+  type      = string
+  sensitive = true
 }
 
 provider "oci" {
@@ -20,7 +33,7 @@ provider "oci" {
   tenancy_ocid     = var.tenancy_ocid
   user_ocid        = var.user_ocid
   fingerprint      = var.fingerprint
-  private_key_path = var.private_key_path
+  auth             = var.oci_auth
 }
 
 variable "github_user" {
