@@ -75,6 +75,19 @@ pipeline:
                               identifier: A
                               type: Inline
                   timeout: 10m
+                  failureStrategies:
+                    - onFailure:
+                        errors:
+                          - AllErrors
+                        action:
+                          type: Retry
+                          spec:
+                            retryCount: 10000
+                            retryIntervals:
+                              - 4m
+                            onRetryFailure:
+                              action:
+                                type: MarkAsFailure
         tags: {}
     - stage:
         name: Trigger Oracle Stack
