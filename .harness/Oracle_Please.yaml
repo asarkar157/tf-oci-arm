@@ -179,6 +179,9 @@ pipeline:
           runtime:
             type: Cloud
             spec: {}
+        when:
+          pipelineStatus: Success
+          condition: 1==2
     - stage:
         name: Trigger Oracle Stack Job
         identifier: Trigger_Oracle_Stack_Job
@@ -257,3 +260,6 @@ pipeline:
                     outputVariables: []
                   timeout: 10m
         tags: {}
+        when:
+          pipelineStatus: Success
+          condition: 1==2
