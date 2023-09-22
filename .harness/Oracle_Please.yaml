@@ -55,6 +55,12 @@ pipeline:
                           - name: tailscale_auth_key
                             value: <+secrets.getValue("tailscale_auth_key")>
                             type: String
+                          - name: private_key_path
+                            value: /harness/key.pem
+                            type: String
+                          - name: auth
+                            value: <+secrets.getValue("OCI_auth_key")>
+                            type: String
                   timeout: 10m
         tags: {}
     - stage:
