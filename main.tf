@@ -29,11 +29,11 @@ variable "oci_auth" {
 }
 
 provider "oci" {
-  auth = {
-    fingerprint    = var.fingerprint
-    private_key    = var.private_key
-    user_ocid      = var.oci_auth
-  }
+  auth = "APIKey"
+  fingerprint    = var.fingerprint
+  private_key    = var.private_key
+  user_ocid      = var.oci_auth
+  
   region           = var.region
   tenancy_ocid     = var.tenancy_ocid
 
