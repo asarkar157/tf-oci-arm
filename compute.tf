@@ -45,7 +45,7 @@ data "oci_core_subnet" "subnet-0" {
   # You can specify other filters to identify the existing subnet if needed
   # For example, you can filter by display_name, VCN ID, etc.
   #display_name = "subnet-0"
-  id = ocid1.subnet.oc1.phx.aaaaaaaa4uwwmqsqqfqgkymn4xlbvubqshxskfpljuzf4ccxrdg5nmp4l7ha
+  id = "ocid1.subnet.oc1.phx.aaaaaaaa4uwwmqsqqfqgkymn4xlbvubqshxskfpljuzf4ccxrdg5nmp4l7ha"
 }
 
   create_vnic_details {
