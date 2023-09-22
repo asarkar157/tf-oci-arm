@@ -9,7 +9,6 @@ variable "tenancy_ocid" {
 
 variable "user_ocid" {
   type      = string
-  sensitive = true
 }
 
 variable "fingerprint" {
