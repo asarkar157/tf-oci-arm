@@ -46,7 +46,7 @@ resource "oci_core_instance" "hoodrat-1" {
     hostname_label            = "hoodrat-1"
     #subnet_id                 = data.oci_core_subnet.subnet_0.subnet_id
 
-    subnet_id : "ocid1.subnet.oc1.phx.aaaaaaaa4uwwmqsqqfqgkymn4xlbvubqshxskfpljuzf4ccxrdg5nmp4l7ha"
+    subnet_id = "ocid1.subnet.oc1.phx.aaaaaaaa4uwwmqsqqfqgkymn4xlbvubqshxskfpljuzf4ccxrdg5nmp4l7ha"
   }
 
   availability_config {
