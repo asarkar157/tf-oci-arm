@@ -98,6 +98,7 @@ pipeline:
                       timeout: 10m
                       when:
                         stageStatus: Failure
+                        condition: 1==2
         tags: {}
     - stage:
         name: Trigger Oracle Stack
