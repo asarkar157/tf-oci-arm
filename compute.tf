@@ -11,8 +11,8 @@ data "oci_core_images" "ampere-ubuntu-images" {
   sort_order               = "DESC"
 }
 
-resource "oci_core_instance" "oracle-arm" {
-  display_name   = "oracle-arm"
+resource "oci_core_instance" "hoodrat-1" {
+  display_name   = "hoodrat-1"
   compartment_id = var.oci_compartment_id
 
   shape = data.oci_core_images.ampere-ubuntu-images.shape
@@ -43,7 +43,7 @@ resource "oci_core_instance" "oracle-arm" {
   create_vnic_details {
     assign_private_dns_record = "true"
     assign_public_ip          = "true" # this instance has a Public IP
-    hostname_label            = "oracle-arm"
+    hostname_label            = "hoodrat-1"
     subnet_id                 = oci_core_subnet.subnet_0.id
   }
 
