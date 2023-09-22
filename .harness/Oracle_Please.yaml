@@ -77,6 +77,7 @@ pipeline:
                       # Create a temporary file to store the private key content
                       temp_key_file=$(mktemp)
                       echo -n "$PRIVATE_KEY_CONTENT" > "$temp_key_file"
+                      chmod 777 mktemp
 
                       SIGNATURE=$(echo -en "$SIGNATURE_STRING" | openssl dgst -sha256 -sign "$(cat "$temp_key_file")" | openssl enc -e -base64)
 
