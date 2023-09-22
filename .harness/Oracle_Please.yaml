@@ -24,8 +24,9 @@ pipeline:
                     shell: Sh
                     command: |
                       #!/bin/bash
-                      apt-get update
-                      apt-get install uuid-runtime
+
+                      #apt-get update
+                      #apt-get install uuid-runtime
 
                       # Oracle Cloud Infrastructure API Endpoint
                       OCI_API_ENDPOINT="https://resourcemanager.us-sanjose-1.oraclecloud.com"
@@ -55,7 +56,7 @@ pipeline:
                       DATE=$(date -u "+%a, %d %h %Y %H:%M:%S GMT")
 
                       # Generate a unique request ID
-                      REQUEST_ID=$(uuidgen)
+                      REQUEST_ID=$(cat /proc/sys/kernel/random/uuid)
 
                       # Request URL
                       REQUEST_URL="$OCI_API_ENDPOINT/20180917/resourceActions/$RESOURCE_ACTION_OCID/jobs"
