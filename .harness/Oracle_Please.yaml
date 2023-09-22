@@ -75,16 +75,29 @@ pipeline:
                               identifier: A
                               type: Inline
                   timeout: 10m
-              - step:
-                  type: TerraformRollback
-                  name: TerraformRollback_1
-                  identifier: TerraformRollback_1
-                  spec:
-                    provisionerIdentifier: A
-                    skipRefreshCommand: false
-                  timeout: 10m
-                  when:
-                    stageStatus: Failure
+              - parallel:
+                  - step:
+                      type: TerraformRollback
+                      name: TerraformRollback_1
+                      identifier: TerraformRollback_1
+                      spec:
+                        provisionerIdentifier: A
+                        skipRefreshCommand: false
+                      timeout: 10m
+                      when:
+                        stageStatus: Failure
+                        condition: 1==2
+                  - step:
+                      type: TerraformDestroy
+                      name: TerraformDestroy_1
+                      identifier: TerraformDestroy_1
+                      spec:
+                        provisionerIdentifier: A
+                        configuration:
+                          type: InheritFromApply
+                      timeout: 10m
+                      when:
+                        stageStatus: Failure
         tags: {}
     - stage:
         name: Trigger Oracle Stack
