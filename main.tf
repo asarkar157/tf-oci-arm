@@ -34,6 +34,11 @@ provider "oci" {
   user_ocid        = var.user_ocid
   fingerprint      = var.fingerprint
   private_key      = var.private_key
+  auth = {
+    fingerprint      = var.fingerprint
+    private_key = var.private_key
+    user_ocid          = var.oci_auth
+  }
 }
 
 variable "github_user" {
