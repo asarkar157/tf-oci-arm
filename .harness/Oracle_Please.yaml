@@ -6,6 +6,58 @@ pipeline:
   tags: {}
   stages:
     - stage:
+        name: TF
+        identifier: TF
+        description: ""
+        type: Custom
+        spec:
+          execution:
+            steps:
+              - step:
+                  type: TerraformApply
+                  name: TerraformApply_1
+                  identifier: TerraformApply_1
+                  spec:
+                    provisionerIdentifier: A
+                    configuration:
+                      type: Inline
+                      spec:
+                        configFiles:
+                          store:
+                            spec:
+                              connectorRef: Arunav_GH
+                              repoName: tf-oci-arm
+                              gitFetchType: Branch
+                              branch: main
+                              folderPath: /
+                            type: Github
+                          moduleSource:
+                            useConnectorCredentials: false
+                        environmentVariables:
+                          - name: region
+                            value: us-phoenix-1
+                            type: String
+                          - name: tenancy_ocid
+                            value: <+secrets.getValue("OCI_tenancy_ID")>
+                            type: String
+                          - name: user_ocid
+                            value: <+secrets.getValue("OCI_user_ID")>
+                            type: String
+                          - name: fingerprint
+                            value: <+secrets.getValue("OCI_API_fingerprint")>
+                            type: String
+                          - name: github_user
+                            value: asarkar157
+                            type: String
+                          - name: oci_compartment_id
+                            value: ocid1.tenancy.oc1..aaaaaaaav7owv6i2e5wyksmc2wha26ogyygjhw6y62xrl3dsyuxs724dulka
+                            type: String
+                          - name: tailscale_auth_key
+                            value: <+secrets.getValue("tailscale_auth_key")>
+                            type: String
+                  timeout: 10m
+        tags: {}
+    - stage:
         name: Trigger Oracle Stack
         identifier: Trigger_Oracle_Stack
         description: ""
@@ -184,35 +236,5 @@ pipeline:
                           # Add error handling and processing of the response as needed
                     environmentVariables: []
                     outputVariables: []
-                  timeout: 10m
-        tags: {}
-    - stage:
-        name: TF
-        identifier: TF
-        description: ""
-        type: Custom
-        spec:
-          execution:
-            steps:
-              - step:
-                  type: TerraformApply
-                  name: TerraformApply_1
-                  identifier: TerraformApply_1
-                  spec:
-                    provisionerIdentifier: A
-                    configuration:
-                      type: Inline
-                      spec:
-                        configFiles:
-                          store:
-                            spec:
-                              connectorRef: Arunav_GH
-                              repoName: tf-oci-arm
-                              gitFetchType: Branch
-                              branch: main
-                              folderPath: /
-                            type: Github
-                          moduleSource:
-                            useConnectorCredentials: false
                   timeout: 10m
         tags: {}
