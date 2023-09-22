@@ -9,6 +9,7 @@ variable "tenancy_ocid" {
 
 variable "user_ocid" {
   type      = string
+  default = "ocid1.user.oc1..aaaaaaaaluu7yprrb674cg3jffoxivbu6mzcwc5qmwdzhtrqqwxv2aodyjzq"
 }
 
 variable "fingerprint" {
