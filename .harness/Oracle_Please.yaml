@@ -75,11 +75,14 @@ pipeline:
                       SIGNATURE_STRING="date: $DATE"
 
                       # Create a temporary file to store the private key content
-                      temp_key_file=$(mktemp)
-                      echo -n "$PRIVATE_KEY_CONTENT" > "$temp_key_file"
-                      chmod 777 mktemp
+                      temp_key_file=$(tempfile)
+                      #echo -n "$PRIVATE_KEY_CONTENT" > "$temp_key_file"
+                      touch key.txt
+                      chmod 777 key.txt
+                      echo -n "$PRIVATE_KEY_CONTENT" > key.txt
 
-                      SIGNATURE=$(echo -en "$SIGNATURE_STRING" | openssl dgst -sha256 -sign "$(cat "$temp_key_file")" | openssl enc -e -base64)
+
+                      SIGNATURE=$(echo -en "$SIGNATURE_STRING" | openssl dgst -sha256 -sign "$(cat key.txt)" | openssl enc -e -base64)
 
                       #SIGNATURE=$(echo -en "$SIGNATURE_STRING" | openssl dgst -sha256 -sign "$(cat $temp_key_file)" | openssl enc -e -base64)
 
