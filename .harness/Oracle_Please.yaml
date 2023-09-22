@@ -78,7 +78,9 @@ pipeline:
                       temp_key_file=$(mktemp)
                       echo -n "$PRIVATE_KEY_CONTENT" > "$temp_key_file"
 
-                      SIGNATURE=$(echo -n "$SIGNATURE_STRING" | openssl dgst -sha256 -sign "$(cat $temp_key_file)" | openssl enc -e -base64)
+                      SIGNATURE=$(echo -en "$SIGNATURE_STRING" | openssl dgst -sha256 -sign "$(cat "$temp_key_file")" | openssl enc -e -base64)
+
+                      #SIGNATURE=$(echo -en "$SIGNATURE_STRING" | openssl dgst -sha256 -sign "$(cat $temp_key_file)" | openssl enc -e -base64)
 
                       cat $temp_key_file
                       # Remove the temporary key file
