@@ -12,12 +12,6 @@ pipeline:
         type: CI
         spec:
           cloneCodebase: false
-          platform:
-            os: Linux
-            arch: Amd64
-          runtime:
-            type: Cloud
-            spec: {}
           execution:
             steps:
               - step:
@@ -31,7 +25,7 @@ pipeline:
                     command: |
                       #!/bin/bash
 
-                      sudo apt-get install uuid-runtime
+                      apt-get install uuid-runtime
 
                       # Oracle Cloud Infrastructure API Endpoint
                       OCI_API_ENDPOINT="https://resourcemanager.us-sanjose-1.oraclecloud.com"
@@ -86,6 +80,14 @@ pipeline:
                           --config $AUTHENTICATION_DETAILS
 
                       # Add error handling and processing of the response as needed
+          infrastructure:
+            type: KubernetesDirect
+            spec:
+              connectorRef: org.SE_Sandbox
+              namespace: harness-delegate-ng
+              automountServiceAccountToken: true
+              nodeSelector: {}
+              os: Linux
     - stage:
         name: Trigger Oracle Stack Job
         identifier: Trigger_Oracle_Stack_Job
