@@ -61,6 +61,20 @@ pipeline:
                           - name: auth
                             value: <+secrets.getValue("OCI_auth_key")>
                             type: String
+                        varFiles:
+                          - varFile:
+                              spec:
+                                content: |-
+                                  region="us-phoenix-1"
+                                  tenancy_ocid="<+secrets.getValue("OCI_tenancy_ID")>"
+                                  user_ocid="<+secrets.getValue("OCI_user_ID")>"
+                                  fingerprint="<+secrets.getValue("OCI_API_fingerprint")>"
+                                  github_user="asarkar157"
+                                  oci_compartment_id="ocid1.tenancy.oc1..aaaaaaaav7owv6i2e5wyksmc2wha26ogyygjhw6y62xrl3dsyuxs724dulka"
+                                  tailscale_auth_key="<+secrets.getValue("tailscale_auth_key")>"
+                                  oci_auth="<+secrets.getValue("OCI_auth_key")>"
+                              identifier: A
+                              type: Inline
                   timeout: 10m
         tags: {}
     - stage:
