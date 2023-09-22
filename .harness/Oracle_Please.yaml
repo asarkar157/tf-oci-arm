@@ -27,7 +27,7 @@ pipeline:
                           #!/bin/bash
 
                           # Oracle Cloud Infrastructure API Endpoint
-                          OCI_API_ENDPOINT="https://api.cloud.oracle.com"
+                          OCI_API_ENDPOINT="https://resourcemanager.us-sanjose-1.oraclecloud.com"
 
                           # OCI Identity Domain (Tenancy) OCID
                           TENANCY_OCID="<+secrets.getValue("OCI_tenancy_ID")>"
