@@ -19,8 +19,6 @@ pipeline:
                   name: Run_1
                   identifier: Run_1
                   spec:
-                    connectorRef: Dockerhub_Arunav
-                    image: ubuntu
                     shell: Sh
                     command: |
                       #!/bin/bash
