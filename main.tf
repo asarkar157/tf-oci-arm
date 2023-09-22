@@ -9,7 +9,6 @@ variable "tenancy_ocid" {
 
 variable "user_ocid" {
   type      = string
-  default = "ocid1.user.oc1..aaaaaaaaluu7yprrb674cg3jffoxivbu6mzcwc5qmwdzhtrqqwxv2aodyjzq"
 }
 
 variable "fingerprint" {
@@ -33,7 +32,7 @@ provider "oci" {
   auth = "APIKey"
   fingerprint    = var.fingerprint
   private_key    = var.private_key
-  user_ocid      = var.oci_auth
+  user_ocid      = var.user_ocid
   
   region           = var.region
   tenancy_ocid     = var.tenancy_ocid
