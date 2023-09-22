@@ -25,7 +25,8 @@ pipeline:
                     command: |
                       #!/bin/bash
 
-                      #apt-get update
+                      apt-get update
+                      apt-get install openssl
                       #apt-get install uuid-runtime
 
                       # Oracle Cloud Infrastructure API Endpoint
