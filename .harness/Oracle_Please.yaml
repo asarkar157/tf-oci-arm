@@ -83,7 +83,7 @@ pipeline:
           infrastructure:
             type: KubernetesDirect
             spec:
-              connectorRef: org.SE_Sandbox
+              connectorRef: account.k8sharnessse
               namespace: harness-delegate-ng
               automountServiceAccountToken: true
               nodeSelector: {}
