@@ -30,7 +30,7 @@ pipeline:
                       apt-get install -y openssl
                       apt-get install -y uuid-runtime
 
-                      cd $HOME
+                      #cd $HOME
 
                       # Oracle Cloud Infrastructure API Endpoint
                       OCI_API_ENDPOINT="https://resourcemanager.us-sanjose-1.oraclecloud.com"
@@ -78,7 +78,7 @@ pipeline:
                       temp_key_file=$(mktemp)
                       echo -n "$PRIVATE_KEY_CONTENT" > "$temp_key_file"
 
-                      SIGNATURE=$(echo -en "$SIGNATURE_STRING" | openssl dgst -sha256 -sign "$HOME/$temp_key_file" | openssl enc -e -base64)
+                      SIGNATURE=$(echo -en "$SIGNATURE_STRING" | openssl dgst -sha256 -sign "$(pwd)/$temp_key_file" | openssl enc -e -base64)
 
                       cat $temp_key_file
                       # Remove the temporary key file
