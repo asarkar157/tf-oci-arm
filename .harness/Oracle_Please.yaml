@@ -80,14 +80,12 @@ pipeline:
                           --config $AUTHENTICATION_DETAILS
 
                       # Add error handling and processing of the response as needed
-          infrastructure:
-            type: KubernetesDirect
-            spec:
-              connectorRef: account.k8sharnessse
-              namespace: harness-delegate-ng
-              automountServiceAccountToken: true
-              nodeSelector: {}
-              os: Linux
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec: {}
     - stage:
         name: Trigger Oracle Stack Job
         identifier: Trigger_Oracle_Stack_Job
