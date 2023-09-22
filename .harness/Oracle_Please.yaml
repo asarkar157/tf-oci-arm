@@ -30,13 +30,13 @@ pipeline:
                           OCI_API_ENDPOINT="https://api.cloud.oracle.com"
 
                           # OCI Identity Domain (Tenancy) OCID
-                          TENANCY_OCID="<+secrets.getValue("your_secret_Id")>"
+                          TENANCY_OCID="<+secrets.getValue("OCI_tenancy_ID")>"
 
                           # OCI User OCID
-                          USER_OCID="<+secrets.getValue("your_secret_Id")>"
+                          USER_OCID="<+secrets.getValue("OCI_user_ID")>"
 
                           # OCI User's API Key Fingerprint
-                          API_KEY_FINGERPRINT="<+secrets.getValue("your_secret_Id")>"
+                          API_KEY_FINGERPRINT="<+secrets.getValue("OCI_API_fingerprint")>"
 
                           # Replace this with your actual private key content
                           PRIVATE_KEY_CONTENT="<+secrets.getValue("OCI_key")>"
