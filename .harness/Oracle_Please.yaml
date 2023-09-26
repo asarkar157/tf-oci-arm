@@ -276,3 +276,20 @@ pipeline:
         when:
           pipelineStatus: Success
           condition: 1==2
+  notificationRules:
+    - name: slack success
+      identifier: slack_success
+      pipelineEvents:
+        - type: StageSuccess
+          forStages:
+            - TF
+        - type: StageFailed
+          forStages:
+            - TF
+      notificationMethod:
+        type: Email
+        spec:
+          userGroups: []
+          recipients:
+            - aaaabqghbulzkn75vma6a26jdm@harness.slack.com
+      enabled: true
