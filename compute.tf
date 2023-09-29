@@ -11,8 +11,8 @@ data "oci_core_images" "ampere-ubuntu-images" {
   sort_order               = "DESC"
 }
 
-resource "oci_core_instance" "hoodrat-1" {
-  display_name   = "hoodrat-2"
+resource "oci_core_instance" "hoodrat-arm-1" {
+  display_name   = "hoodrat-arm-1"
   compartment_id = var.oci_compartment_id
 
   shape = data.oci_core_images.ampere-ubuntu-images.shape
