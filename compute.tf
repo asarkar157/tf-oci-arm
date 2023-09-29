@@ -43,7 +43,7 @@ resource "oci_core_instance" "hoodrat-arm-1" {
   create_vnic_details {
     assign_private_dns_record = "true"
     assign_public_ip          = "true" # this instance has a Public IP
-    hostname_label            = "hoodrat-1"
+    hostname_label            = "hoodrat-arm-1"
     #subnet_id                 = data.oci_core_subnet.subnet_0.subnet_id
 
     subnet_id = "ocid1.subnet.oc1.phx.aaaaaaaa4uwwmqsqqfqgkymn4xlbvubqshxskfpljuzf4ccxrdg5nmp4l7ha"
